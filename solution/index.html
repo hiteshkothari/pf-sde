@@ -1,0 +1,49 @@
+<head>
+    <script src="balancesheet.js"></script>
+</head>
+
+<body>
+    <input type="file" name="inputfile" id="inputfile" accept=".json">
+
+    <script type="text/javascript">
+
+        // With Sample data 
+        console.log(generateSheet({
+            "expenseData": [
+                {
+                    "amount": 20,
+                    "startDate": "2021-02-01T00:00:00.000Z"
+                },
+                {
+                    "amount": 30,
+                    "startDate": "2021-03-01T00:00:00.000Z"
+                }
+            ],
+            "revenueData": [
+                {
+                    "amount": 10,
+                    "startDate": "2021-01-01T00:00:00.000Z"
+                },
+                {
+                    "amount": 60,
+                    "startDate": "2021-02-01T00:00:00.000Z"
+                }
+            ]
+        }));
+
+
+        // using A file
+        document.getElementById('inputfile')
+            .addEventListener('change', function () {
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    // console.log('event 0', e);
+                    if (e.target.result != "")
+                        console.log(generateSheet(JSON.parse(e.target.result)));
+                    else
+                        console.log('Please upload a proper file');
+                }
+                fr.readAsText(this.files[0]);
+            })
+    </script>
+</body>
